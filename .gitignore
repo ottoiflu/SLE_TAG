@@ -1,1 +1,25 @@
+# Local editor/agent configuration
 **/.obsidian/
+/.claude/
+/.codex/
+/.mcp.json
+/.vscode/
+
+# Nested standalone repositories. Manage and commit them independently.
+/sle_local/
+/hisiflash/
+
+# Local build and analysis artifacts
+**/.venv/
+**/.uv-cache/
+**/.ccache/
+**/target/
+**/build/
+**/output/
+**/__pycache__/
+**/*.log
+
+# OS/editor temporary files
+**/.DS_Store
+**/*~
+**/*.swp

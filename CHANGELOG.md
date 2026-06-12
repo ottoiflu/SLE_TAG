@@ -1,5 +1,14 @@
 # Changelog
 
+## [Unreleased]
+
+### Changed
+
+- 建立根目录 README、文档中心、工程管理规范和只读工程状态脚本。
+- 将硬件设计插图归档到 `Docs/assets/hardware/` 并使用语义化名称。
+- 统一文档中的 EDA 基线为 `BS21_1/Board1/P1/PCB1`，烧录流程统一为本地 `hisiflash`。
+- 软件文档按源码审查结果区分已实现功能与占位框架，记录 LED、按钮、NFC 和低功耗阻塞项。
+
 ## [0.2.0] - 2026-06-10
 
 ### Added
@@ -12,7 +21,7 @@
 
 ### Fixed
 
-- **ADC 引脚错误 (P0)**: `BOARD_PIN_BAT_ADC` 从 S_MGPIO4 修正为 S_MGPIO2，匹配原理图 P2 中 BAT_ADC 的实际连接 (U1.4 GPIO_02/AIN0)
+- **ADC 引脚错误 (P0)**: `BOARD_PIN_BAT_ADC` 从 S_MGPIO4 修正为 S_MGPIO2，匹配原理图 P1 中 BAT_ADC 的实际连接 (U1.4 GPIO_02/AIN0)
 - **CMakeLists 缺失**: 将 peripheral/ 下所有外设源文件按 Kconfig 条件加入编译列表，并添加 peripheral/ 头文件搜索路径
 - **蜂鸣器/ADC 仅初始化未调用**: Tag 主循环从空 `osal_msleep(1000)` 改为周期性电量监测 (5s)、上电蜂鸣自检、低电量告警和空闲休眠逻辑
 - Kconfig 中 ADC 帮助文本从 GPIO_04 更正为 GPIO_02/AIN0
