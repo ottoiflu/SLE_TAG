@@ -57,6 +57,6 @@ sle_local/src/output/bs21e/fwpkg/standard-bs21e-1100e/bs21e_all_in_one.fwpkg
 - 根仓库：项目管理、硬件文档、项目级变更记录。
 - `sle_local/`：固件源码、构建环境、实验数据和固件归档。
 - `hisiflash/`：烧录工具源码。
-- `Docs/fbb_bs2x/`：SDK 参考快照；根仓库当前记录为 gitlink，但缺少 `.gitmodules` 映射，迁移或重新克隆前需先修复来源定义。
+- `Docs/fbb_bs2x/`：FBB BS2X SDK 参考快照，本地普通目录，不纳入版本管理；在线文档为 https://docs.hisilicon.com/repos/fbb_bs2x/zh-CN/master/ ，快照丢失时从 HiSpark 官方仓库重新获取。
 
 不要在根仓库中直接提交 `sle_local/`、`hisiflash/`、虚拟环境、编译缓存或构建目录。

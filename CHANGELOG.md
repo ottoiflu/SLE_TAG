@@ -2,7 +2,13 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- 移除 `Docs/fbb_bs2x` 的悬空 gitlink 记录（无 `.git` 且无 `.gitmodules` 映射），改为 gitignore 的本地参考快照，消除克隆后目录缺失的隐患。
+
 ### Changed
+
+- AGENTS.md 渐进式文档索引补全 `README.md`、`Docs/README.md` 和 `Docs/焊接与调试指南.md`。
 
 - 建立根目录 README、文档中心、工程管理规范和只读工程状态脚本。
 - 将硬件设计插图归档到 `Docs/assets/hardware/` 并使用语义化名称。

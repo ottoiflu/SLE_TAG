@@ -9,6 +9,9 @@
 /sle_local/
 /hisiflash/
 
+# Local SDK reference snapshot (plain copy, not a submodule)
+/Docs/fbb_bs2x/
+
 # Local build and analysis artifacts
 **/.venv/
 **/.uv-cache/
