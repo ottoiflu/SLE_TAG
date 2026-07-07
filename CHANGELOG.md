@@ -2,18 +2,20 @@
 
 ## [Unreleased]
 
+### Added
+
+- Tag 固件新增电池电压/电量监测：每次定位帧通过 BLE 上报 `batteryMv` 和 `batteryPct`，APP 端显示实时电压和电量百分比。
+- `scripts/serial_monitor.py`: 串口日志实时采集脚本，带毫秒级时间戳，支持自定义端口和波特率。
+
 ### Fixed
 
-- 移除 `Docs/fbb_bs2x` 的悬空 gitlink 记录（无 `.git` 且无 `.gitmodules` 映射），改为 gitignore 的本地参考快照，消除克隆后目录缺失的隐患。
+- Kconfig 修复多余的 `endif` 导致构建失败。
+- `sle_locate_adc.c` 补充缺失的 `pinctrl.h` 头文件。
 
 ### Changed
 
-- AGENTS.md 渐进式文档索引补全 `README.md`、`Docs/README.md` 和 `Docs/焊接与调试指南.md`。
-
-- 建立根目录 README、文档中心、工程管理规范和只读工程状态脚本。
-- 将硬件设计插图归档到 `Docs/assets/hardware/` 并使用语义化名称。
-- 统一文档中的 EDA 基线为 `BS21_1/Board1/P1/PCB1`，烧录流程统一为本地 `hisiflash`。
-- 软件文档按源码审查结果区分已实现功能与占位框架，记录 LED、按钮、NFC 和低功耗阻塞项。
+- 构建脚本 `build_locate_firmwares.py` Tag 构建时显式启用 ADC 和 BLE。
+- `standard_bs21e_1100e.config` 默认启用 `CONFIG_SLE_LOCATE_ENABLE_ADC`。
 
 ## [0.2.0] - 2026-06-10
 
