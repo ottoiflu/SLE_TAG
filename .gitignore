@@ -7,6 +7,7 @@
 
 # Nested standalone repositories. Manage and commit them independently.
 /sle_local/
+/location_app/
 /hisiflash/
 
 # Local SDK reference snapshot (plain copy, not a submodule)
@@ -26,3 +27,12 @@
 **/.DS_Store
 **/*~
 **/*.swp
+
+# submit_materials - large binary files excluded from version control
+/submit_materials/**/*.mp4
+/submit_materials/**/*.docx
+/submit_materials/**/*.pdf
+/submit_materials/**/*.svg
+/submit_materials/**/*.png
+/submit_materials/**/*.jpg
+/submit_materials/**/*.rar

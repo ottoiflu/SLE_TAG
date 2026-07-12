@@ -4,8 +4,17 @@
 
 ### Added
 
+- `.github/workflows/ci.yml`: 主 CI 流水线（子模块校验、hisiflash Rust 构建测试、location_app Android 构建、文档链接校验）。
+- `.github/workflows/firmware-build.yml`: 固件批量构建流水线（需自托管 Runner + HiSilicon SDK）。
 - Tag 固件新增电池电压/电量监测：每次定位帧通过 BLE 上报 `batteryMv` 和 `batteryPct`，APP 端显示实时电压和电量百分比。
 - `scripts/serial_monitor.py`: 串口日志实时采集脚本，带毫秒级时间戳，支持自定义端口和波特率。
+- `Docs/硬件参考_BearPi_Pico_H2821E.md`: BearPi Pico H2821E 开发板硬件参考。
+
+### Changed
+
+- 项目目录整理：`app_logo.png` 移入 `Docs/assets/`。
+- 清理 `submit_materials/` 冗余文件（旧版视频 v1、旧版文档 v2、模板、未签名授权书）。
+- `.gitignore` 统一子模块忽略规则（补充 `location_app`），新增 `submit_materials/` 大文件排除规则。
 
 ### Fixed
 

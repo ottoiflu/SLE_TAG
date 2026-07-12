@@ -1,6 +1,6 @@
 # 基于 BS21 星闪平台的高精度低成本室内协同定位系统
 
-本目录是项目总工程，负责硬件设计、项目级文档和跨仓库协作。固件与烧录工具分别保存在两个独立 Git 仓库中，提交和版本管理必须分开进行。
+本目录是项目总工程，负责硬件设计、项目级文档和跨仓库协作。固件、应用和烧录工具分别保存在独立 Git 仓库中，提交和版本管理必须分开进行。
 
 ## 项目简介
 
@@ -18,6 +18,7 @@
 | --- | --- | --- |
 | 硬件 | 嘉立创 EDA `赫哥不要/BS21_1`，`Board1/P1/PCB1` | 原理图已加入 0402 调试 LED；原理图 DRC 尚有 25 个警告；PCB 待复核 |
 | 固件 | `sle_local/` | BS21E FBB SDK，使用 uv 管理 Python 构建环境 |
+| 应用 | `location_app/` | Android/HarmonyOS 定位演示应用 |
 | 烧录 | `hisiflash/` | BS2X 实验性 SEBOOT/YMODEM 支持，使用 UART_L0 |
 | 项目文档 | `Docs/` | 硬件、软件、测试、焊接和工程管理文档 |
 
@@ -65,8 +66,9 @@ sle_local/src/output/bs21e/fwpkg/standard-bs21e-1100e/bs21e_all_in_one.fwpkg
 ## 仓库边界
 
 - 根仓库：项目管理、硬件文档、项目级变更记录。
-- `sle_local/`：固件源码、构建环境、实验数据和固件归档。
-- `hisiflash/`：烧录工具源码。
+- `sle_local/`：固件源码、构建环境、实验数据和固件归档；根仓库以子模块固定提交。
+- `location_app/`：Android/HarmonyOS 应用源码、测试和应用专属文档；根仓库以子模块固定提交。
+- `hisiflash/`：烧录工具源码。当前为独立嵌套仓库，根仓库不固定其提交；发布或复现时必须记录其 commit。
 - `Docs/fbb_bs2x/`：FBB BS2X SDK 参考快照，本地普通目录，不纳入版本管理；在线文档为 https://docs.hisilicon.com/repos/fbb_bs2x/zh-CN/master/ ，快照丢失时从 HiSpark 官方仓库重新获取。
 
-不要在根仓库中直接提交 `sle_local/`、`hisiflash/`、虚拟环境、编译缓存或构建目录。
+不要在根仓库中直接提交子仓库源码、虚拟环境、编译缓存或构建目录；子仓库必须在各自仓库中提交。

@@ -1,0 +1,74 @@
+name: Firmware Build
+
+# 固件构建流水线 — 需要自托管 Runner 预装 HiSilicon BS2X SDK
+# 若暂无自托管 Runner，此工作流不会自动触发，可在 GitHub Actions 页面手动触发
+# 并选择自托管 Runner 标签执行。
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "sle_local/**"
+      - ".github/workflows/firmware-build.yml"
+  workflow_dispatch:
+    inputs:
+      num_anchors:
+        description: "Anchor 数量"
+        required: false
+        default: "4"
+        type: string
+
+jobs:
+  build-all-firmwares:
+    # 仅在自托管 Runner（带有 bs21-sdk 标签）上执行
+    runs-on: [self-hosted, bs21-sdk]
+    timeout-minutes: 120
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: 验证 SDK 环境
+        run: |
+          set -e
+          echo "Python: $(python3 --version)"
+          echo "uv: $(uv --version 2>/dev/null || echo 'not found')"
+          if [ ! -d "sle_local/src" ]; then
+            echo "错误: sle_local SDK 源码不存在"
+            exit 1
+          fi
+          echo "SDK 环境就绪"
+
+      - name: 构建所有固件 (Tag + N Anchors)
+        working-directory: sle_local
+        env:
+          NUM_ANCHORS: ${{ github.event.inputs.num_anchors || '4' }}
+        run: |
+          set -e
+          ARGS=""
+          if [ -n "$NUM_ANCHORS" ]; then
+            ARGS="--num-anchors $NUM_ANCHORS"
+          fi
+          python3 tools/build_locate_firmwares.py $ARGS
+
+      - name: 归档固件产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: firmware-locate
+          path: sle_local/output/firmware/locate/
+          retention-days: 30
+
+      - name: 构建摘要
+        run: |
+          echo "## 固件构建完成" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          for role_dir in sle_local/output/firmware/locate/*/; do
+            role=$(basename "$role_dir")
+            echo "- **$role**" >> "$GITHUB_STEP_SUMMARY"
+            if [ -f "$role_dir/BUILD_META.txt" ]; then
+              echo '```' >> "$GITHUB_STEP_SUMMARY"
+              cat "$role_dir/BUILD_META.txt" >> "$GITHUB_STEP_SUMMARY"
+              echo '```' >> "$GITHUB_STEP_SUMMARY"
+            fi
+          done

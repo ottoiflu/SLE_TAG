@@ -17,7 +17,13 @@ repo_status() {
 
 repo_status "project root" "$ROOT"
 repo_status "firmware: sle_local" "$ROOT/sle_local"
+repo_status "application: location_app" "$ROOT/location_app"
 repo_status "flasher: hisiflash" "$ROOT/hisiflash"
+
+printf '\n== submodule consistency ==\n'
+if ! git -C "$ROOT" submodule status --recursive; then
+    printf 'submodule metadata is incomplete; check .gitmodules and root gitlinks\n'
+fi
 
 printf '\n== key artifacts ==\n'
 for file in \
@@ -31,4 +37,4 @@ for file in \
 done
 
 printf '\n== disk usage ==\n'
-du -sh "$ROOT/Docs" "$ROOT/sle_local" "$ROOT/hisiflash" 2>/dev/null
+du -sh "$ROOT/Docs" "$ROOT/sle_local" "$ROOT/location_app" "$ROOT/hisiflash" "$ROOT/submit_materials" 2>/dev/null

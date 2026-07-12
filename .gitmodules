@@ -1,3 +1,11 @@
 [submodule "sle_local"]
 	path = sle_local
 	url = https://github.com/djc12321/sle_local.git
+
+[submodule "location_app"]
+	path = location_app
+	url = https://github.com/djc12321/location_app.git
+
+[submodule "hisiflash"]
+	path = hisiflash
+	url = https://github.com/sanchuanhehe/hisiflash.git
